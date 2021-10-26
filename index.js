@@ -9,7 +9,7 @@ const router = express.Router();
 dotenv.config();
 let port = 3000;
 if( process.env.NODE_ENV === 'development') {
-  port = 3000; //49160
+  port = 8000;
 }
 
 const app = express();
@@ -50,12 +50,38 @@ io.on('connect', socket => {
 })
 
 // routers
+// recevie message from wechaty, saving to our database, and forward to our front end app
 router.post('/v1/forward-message', async(req, res) => {
+  // TODO: save the message to our database  
   const data = req.body;
   const socketId = data.socketId;
-  console.log(data)
   res.io.emit(socketId, data);
   res.send('success');
+})
+
+// send message thru wechaty
+router.post('/v1/wechaty-message', async (req, res) => {  
+  const name = req.body.name;
+  const message = req.body.message;
+
+  try {
+    const wechatyRes = await axios.post(`${process.env.WECHATY_MS}/v1/message`, {
+      name, message
+    })
+    // save the message to database
+    res.sendStatus(200)
+  } catch (err) {
+    // todo ping user on with socket.io that message failed to send
+    res.sendStatus(500);
+  }
+})
+
+// data for getting list of contacts 
+router.get('/v1/contacts', (req, res) => {
+  res.send([
+    {"name": "Kaka", "id": "7881300233152715", "avatar": "http://mmhead.c2c.wechat.com/mmhead/SMt4cxnN46q1o0KsondHotCuFkCZh28ZbKHichbnFRFbiad2ZkRFswkg/0"},
+    {"name": "may 张丹萍", "id": "7881302734171450", "avatar": "http://mmhead.c2c.wechat.com/mmhead/bVy2VQVTWzbNu2kVtzRgbiaPAO53Ws8uG1HB7PS2bBGNr6mEfj80XUA/0"}
+  ])
 })
 
 app.use(router);
