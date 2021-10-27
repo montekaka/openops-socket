@@ -76,6 +76,23 @@ router.post('/v1/wechaty-message', async (req, res) => {
   }
 })
 
+// wechat new friend request
+// {
+//   kfWechatId, 
+//   fromUserName, 
+//   fromUserId,
+//   fromUserAvatar
+// }
+router.post('/v1/wechat-friendship', async (req, res) => {  
+
+  const data = req.body;
+  console.log(data);
+  res.io.emit("friends", data);
+  res.send('success');
+  // TODO: change to use an unify socket
+  // TODO: save to database...
+})
+
 // data for getting list of contacts 
 router.get('/v1/contacts', (req, res) => {
   res.send([
