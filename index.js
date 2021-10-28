@@ -54,8 +54,12 @@ io.on('connect', socket => {
 router.post('/v1/forward-message', async(req, res) => {
   // TODO: save the message to our database  
   const data = req.body;
-  const socketId = data.socketId;
-  res.io.emit(socketId, data);
+  // const socketId = data.socketId;
+  const socketId = 'wechat';
+  res.io.emit(socketId, {
+    type: 'new-message',
+    data
+  });
   res.send('success');
 })
 
@@ -86,8 +90,11 @@ router.post('/v1/wechaty-message', async (req, res) => {
 router.post('/v1/wechat-friendship', async (req, res) => {  
 
   const data = req.body;
-  console.log(data);
-  res.io.emit("friends", data);
+  const socketId = 'wechat';
+  res.io.emit(socketId, {
+    type: 'new-friend',
+    data
+  });
   res.send('success');
   // TODO: change to use an unify socket
   // TODO: save to database...
