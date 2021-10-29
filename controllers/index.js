@@ -1,5 +1,7 @@
-import {refreshContactAccessToken} from './wecom-controller.js'
+import {refreshContactAccessToken, getDepartments, getMembers} from './wecom-controller.js'
 
 export {
-  refreshContactAccessToken
+  getDepartments,
+  refreshContactAccessToken,
+  getMembers
 }

@@ -4,7 +4,9 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import axios from "axios";
 import {
-  refreshContactAccessToken
+  refreshContactAccessToken,
+  getDepartments,
+  getMembers
 } from './controllers/index.js'
 
 const router = express.Router();
@@ -112,6 +114,8 @@ router.get('/v1/contacts', (req, res) => {
 })
 
 router.get('/v1/wecom-refresh-contact-access-token', refreshContactAccessToken)
+router.get('/v1/wecom-departments', getDepartments)
+router.get('/v1/wecom-departments-members/:department_id', getMembers)
 
 app.use(router);
 
