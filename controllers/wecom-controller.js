@@ -118,7 +118,6 @@ const getMember = (req, res) => {
   // https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_contact_way?access_token=ACCESS_TOKEN
   return axios.get(`https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=${access_token}&userid=${user_id}`)
   .then((result) => {
-    console.log(result.data)
     if(result.data.errcode) {
       res.status(500);  
       res.send(result.data);
