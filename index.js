@@ -7,7 +7,7 @@ import {
   refreshContactAccessToken,
   getDepartments,
   getMembers,
-  generateMemberQr,
+  getMember,
   refreshMessageAccessToken,
   refreshMemberContactAccessToken
 } from './controllers/index.js'
@@ -121,7 +121,7 @@ router.get('/v1/wecom-refresh-message-access-token', refreshMessageAccessToken)
 router.get('/v1/wecom-refresh-member-access-token', refreshMemberContactAccessToken)
 router.get('/v1/wecom-departments', getDepartments)
 router.get('/v1/wecom-departments-members/:department_id', getMembers)
-router.get('/v1/wecom-member-qr/:user_id', generateMemberQr)
+router.get('/v1/wecom-member/:user_id', getMember)
 
 
 app.use(router);

@@ -99,7 +99,6 @@ const getMembers = (req, res) => {
   // https://work.weixin.qq.com/api/doc/90000/90135/90201
   return axios.get(`https://qyapi.weixin.qq.com/cgi-bin/user/list?access_token=${access_token}&department_id=${department_id}`)
   .then((result) => {
-    console.log(result.data)
     if(result.data.errcode) {
       res.status(500);  
     } else {
@@ -111,17 +110,13 @@ const getMembers = (req, res) => {
   });
 }
 
-const generateMemberQr = (req, res) => {
+const getMember = (req, res) => {
   const access_token = getMemberAccessToken();
   const {user_id} = req.params;
-  console.log({user_id})
+
   // https://work.weixin.qq.com/api/doc/90000/90135/92572
   // https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_contact_way?access_token=ACCESS_TOKEN
-  return axios.post(`https://qyapi.weixin.qq.com/cgi-bin/externalcontact/add_contact_way?access_token=${access_token}`, {
-    "type" :1,
-    "scene":2,
-    "user": [user_id]
-  })
+  return axios.get(`https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=${access_token}&userid=${user_id}`)
   .then((result) => {
     console.log(result.data)
     if(result.data.errcode) {
@@ -143,5 +138,5 @@ export {
   refreshMemberContactAccessToken,
   getDepartments,
   getMembers,
-  generateMemberQr
+  getMember
 }
