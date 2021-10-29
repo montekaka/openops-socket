@@ -1,5 +1,7 @@
-import {getContactAccessToken} from './wecom-tokens.js'
+import {getContactAccessToken, getMemberAccessToken, getMessageAccessToken} from './wecom-tokens.js'
 
 export {
-  getContactAccessToken
+  getContactAccessToken,
+  getMessageAccessToken,
+  getMemberAccessToken
 }

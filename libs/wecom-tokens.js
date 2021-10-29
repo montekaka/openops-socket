@@ -5,6 +5,18 @@ const getContactAccessToken = () => {
   return data.toString();
 }
 
+const getMessageAccessToken = () => {
+  const data = fs.readFileSync('tmp/message-access-token.txt')
+  return data.toString();
+}
+
+const getMemberAccessToken = () => {
+  const data = fs.readFileSync('tmp/member-access-token.txt')
+  return data.toString();
+}
+
 export {
-  getContactAccessToken
+  getContactAccessToken,
+  getMessageAccessToken,
+  getMemberAccessToken
 }

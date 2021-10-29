@@ -6,7 +6,10 @@ import axios from "axios";
 import {
   refreshContactAccessToken,
   getDepartments,
-  getMembers
+  getMembers,
+  generateMemberQr,
+  refreshMessageAccessToken,
+  refreshMemberContactAccessToken
 } from './controllers/index.js'
 
 const router = express.Router();
@@ -114,8 +117,12 @@ router.get('/v1/contacts', (req, res) => {
 })
 
 router.get('/v1/wecom-refresh-contact-access-token', refreshContactAccessToken)
+router.get('/v1/wecom-refresh-message-access-token', refreshMessageAccessToken)
+router.get('/v1/wecom-refresh-member-access-token', refreshMemberContactAccessToken)
 router.get('/v1/wecom-departments', getDepartments)
 router.get('/v1/wecom-departments-members/:department_id', getMembers)
+router.get('/v1/wecom-member-qr/:user_id', generateMemberQr)
+
 
 app.use(router);
 
