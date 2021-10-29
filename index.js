@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import axios from "axios";
+import {
+  refreshContactAccessToken
+} from './controllers/index.js'
 
 const router = express.Router();
 
@@ -107,6 +110,8 @@ router.get('/v1/contacts', (req, res) => {
     {"name": "may 张丹萍", "id": "7881302734171450", "avatar": "http://mmhead.c2c.wechat.com/mmhead/bVy2VQVTWzbNu2kVtzRgbiaPAO53Ws8uG1HB7PS2bBGNr6mEfj80XUA/0"}
   ])
 })
+
+router.get('/v1/wecom-refresh-contact-access-token', refreshContactAccessToken)
 
 app.use(router);
 
